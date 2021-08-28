@@ -1,3 +1,7 @@
 Diana Gil
 Hola
+<<<<<<< HEAD
 hola Eduardo jimenez 
+=======
+Prueba clase 
+>>>>>>> 7ce46f5f49e4fde3a5942a0eb7a2d496007b7fc7
