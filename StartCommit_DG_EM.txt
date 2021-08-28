@@ -1,0 +1,42 @@
+library(dplyr)
+#setwd("~/Trabajo/MapasGatos_2021/T2")
+
+#Subir dataframes para mapa
+
+MnpioRegistros <- read.delim("~/Trabajo/MapasGatos_2021/T2/MnpioRegistros.txt")
+View(MnpioRegistros)
+
+Gatos_Perros_Col <- read.delim("~/Trabajo/MapasGatos_2021/T2_T3/Gatos_Perros_Col.txt")
+View(Gatos_Perros_Col)
+
+HumanRegistros <- read.delim("~/Trabajo/MapasGatos_2021/T2_T3/HumanRegistros.txt")
+View(HumanRegistros)
+
+#Crear función pra enlazar filas Full Join
+BD_Join= full_join(MnpioRegistros, Gatos_Perros_Col, by= "Mnpio")
+BD_Join
+write.csv(BD_Join,file="BD_Join.csv")
+
+#Unificando los datos de gatos y perros, con los poblacionales del DANE
+BD_AllJoin= full_join(BD_Join, HumanRegistros, by= "Mnpio")
+BD_AllJoin
+write.csv(BD_AllJoin,file="BD_AllJoin.csv")
+
+###Base de datos Raul
+
+Gatos2020 <- read.delim("~/Trabajo/MapasGatos_2021/T2_T3/Gatos2020.txt")
+View(Gatos2020)
+
+Gatos2021 <- read.delim("~/Trabajo/MapasGatos_2021/T2_T3/Gatos2021.txt")
+View(Gatos2021)
+
+#Crear función pra enlazar filas Full Join
+BD_Join1= full_join(Gatos2020, Gatos2021, by= "Mnpio")
+BD_Join1
+
+BD_Join2= full_join(BD_Join1, Gatos_Perros_Col, by= "Mnpio")
+BD_Join2
+
+BD_join3= full_join(BD_Join2, HumanRegistros, by= "Mnpio")
+BD_join3
+write.csv(BD_join3,file="BD_Sedano.csv")
